@@ -1,0 +1,5 @@
+node_modules
+dist
+out
+*.log*
+README_to_llm.md
