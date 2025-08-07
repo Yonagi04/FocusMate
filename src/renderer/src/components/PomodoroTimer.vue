@@ -249,12 +249,10 @@ onMounted(async () => {
   padding: 0;
   box-sizing: border-box;
 }
-
 .settings-btn:hover,
 .theme-btn:hover {
   opacity: 1;
 }
-
 .settings-btn .icon,
 .theme-btn .icon,
 .settings-btn svg,
@@ -263,6 +261,8 @@ onMounted(async () => {
   margin: 0;
   padding: 0;
 }
+
+/* 设置弹窗蒙层 */
 .settings-modal {
   position: fixed;
   left: 0; top: 0; right: 0; bottom: 0;
@@ -272,12 +272,15 @@ onMounted(async () => {
   justify-content: center;
   z-index: 1000;
 }
+
+/* 深色模式（默认）设置页 */
 .settings-content {
-  background: #fff;
+  background: #23263a;
+  color: #e0e6f0;
   border-radius: 10px;
   padding: 32px 24px 20px 24px;
   min-width: 300px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.32);
 }
 .setting-item {
   display: flex;
@@ -288,13 +291,16 @@ onMounted(async () => {
   flex: 1;
   text-align: right;
   margin-right: 10px;
+  color: #bfc9d4;
 }
 .setting-item input[type="number"] {
   width: 70px;
   padding: 4px 8px;
   font-size: 1em;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid #3a3f5a;
+  background: #23263a;
+  color: #e0e6f0;
 }
 .settings-actions {
   display: flex;
@@ -306,27 +312,67 @@ onMounted(async () => {
   padding: 6px 18px;
   font-size: 1em;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  background: #f5f5f5;
+  border: 1px solid #3a3f5a;
+  background: #2f3241;
+  color: #e0e6f0;
   cursor: pointer;
   transition: background 0.2s;
 }
-.settings-actions button:hover {
-  background: #e6e6e6;
+.settings-actions button:hover,
+button:hover {
+  background: #49507a; /* 比 #363a4f 更亮且更明显 */
+  border-color: #6c7ae0; /* 增加高亮描边 */
+  color: #fff;
 }
 button {
   margin: 0 8px;
   padding: 8px 20px;
   font-size: 1em;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  background: #f5f5f5;
+  border: 1px solid #3a3f5a;
+  background: #2f3241;
+  color: #e0e6f0;
   cursor: pointer;
   transition: background 0.2s;
 }
 button:disabled {
+  background: #23263a;
+  color: #555a6a;
+  cursor: not-allowed;
+}
+
+/* 浅色模式设置页（body.light） */
+body.light .settings-modal {
+  background: rgba(0,0,0,0.12);
+}
+body.light .settings-content {
+  background: #fff;
+  color: #2f3241;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+}
+body.light .setting-item label {
+  color: #2f3241;
+}
+body.light .setting-item input[type="number"] {
+  background: #fff;
+  color: #2f3241;
+  border: 1px solid #bbb;
+}
+body.light .settings-actions button {
+  background: #f0f0f0;
+  color: #2f3241;
+  border: 1px solid #bbb;
+}
+body.light .settings-actions button:hover {
+  background: #e0e0e0;
+}
+body.light button {
+  background: #f0f0f0;
+  color: #2f3241;
+  border: 1px solid #bbb;
+}
+body.light button:disabled {
   background: #eee;
   color: #aaa;
-  cursor: not-allowed;
 }
 </style>
