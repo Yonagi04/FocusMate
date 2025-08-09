@@ -6,7 +6,7 @@ import icon from '../../resources/icon.png?asset'
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    title: 'Pomodoro Timer',
+    title: 'FocusMate',
     width: 400,
     height: 500,
     resizable: false,

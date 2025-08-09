@@ -1,7 +1,7 @@
 <template>
   <div class="pomodoro-timer">
     <h2>
-      <template v-if="!started">欢迎使用番茄钟，请点击“开始”专注工作吧！</template>
+      <template v-if="!started">欢迎使用FocusMate，请点击“开始”专注工作吧！</template>
       <template v-else>{{ isWork ? '工作中，请专心工作哦~' : '休息中，放松一下吧~' }}</template>
     </h2>
     <h3>
@@ -47,6 +47,10 @@
           <div class="setting-item">
             <label>长休息轮数：</label>
             <input type="number" min="1" v-model.number="longBreakRoundInput" />
+          </div>
+          <div class="setting-item">
+            <label>计时结束时系统提示音：</label>
+            <el-switch v-model="sysNotifyInput"/>
           </div>
           <div class="settings-actions">
             <button @click="applySettings">确定</button>
@@ -118,11 +122,13 @@ const DEFAULT_WORK = 25 // 默认工作时长 25分钟
 const DEFAULT_BREAK = 5 // 默认休息时长 5分钟
 const DEFAULT_LONG_BREAK = 15 // 默认长休息时长 15分钟
 const DEFAULT_LONG_BREAK_ROUND = 4 // 默认长休息轮数 4轮
+const DEFAULT_SYS_NOTIFY = true // 默认系统通知音开启
 
 const WORK_DURATION = ref(DEFAULT_WORK * 60)
 const BREAK_DURATION = ref(DEFAULT_BREAK * 60)
 const LONG_BREAK_DURATION = ref(DEFAULT_LONG_BREAK * 60)
 const LONG_BREAK_ROUND = ref(DEFAULT_LONG_BREAK_ROUND)
+const SYS_NOTIFY = ref(DEFAULT_SYS_NOTIFY)
 
 const isWork = ref(true)
 const timeLeft = ref(WORK_DURATION.value)
@@ -136,6 +142,7 @@ const workInput = ref(getSetting('work', DEFAULT_WORK))
 const breakInput = ref(getSetting('break', DEFAULT_BREAK))
 const longBreakInput = ref(getSetting('longBreak', DEFAULT_LONG_BREAK))
 const longBreakRoundInput = ref(getSetting('longBreakRound', DEFAULT_LONG_BREAK_ROUND))
+const sysNotifyInput = ref(getSetting('sysNotify', DEFAULT_SYS_NOTIFY))
 
 const minutes = computed(() => String(Math.floor(timeLeft.value / 60)).padStart(2, '0'))
 const seconds = computed(() => String(timeLeft.value % 60).padStart(2, '0'))
@@ -221,11 +228,11 @@ function closeWhiteNoise() {
 
 function showNotification(title, body) {
   if (window.Notification && Notification.permission === 'granted') {
-    new Notification(title, { body })
+    new Notification(title, { body, silent: !SYS_NOTIFY.value, icon: new URL('../assets/icon.png', import.meta.url).href })
   } else if (window.Notification && Notification.permission !== 'denied') {
     Notification.requestPermission().then(permission => {
       if (permission === 'granted') {
-        new Notification(title, { body })
+        new Notification(title, { body, silent: !SYS_NOTIFY.value, icon: new URL('../assets/icon.png', import.meta.url).href })
       }
     })
   }
@@ -292,15 +299,18 @@ function applySettings() {
   BREAK_DURATION.value = Math.max(1, breakInput.value) * 60
   LONG_BREAK_DURATION.value = Math.max(1, longBreakInput.value) * 60
   LONG_BREAK_ROUND.value = Math.max(1, longBreakRoundInput.value)
+  SYS_NOTIFY.value = sysNotifyInput.value
   setSetting('work', workInput.value)
   setSetting('break', breakInput.value)
   setSetting('longBreak', longBreakInput.value)
   setSetting('longBreakRound', longBreakRoundInput.value)
+  setSetting('sysNotify', sysNotifyInput.value)
   console.log('Settings saved:', {
     work: workInput.value,
     break: breakInput.value,
     longBreak: longBreakInput.value,
-    longBreakRound: longBreakRoundInput.value
+    longBreakRound: longBreakRoundInput.value,
+    sysNotify: sysNotifyInput.value
   })
   resetTimer()
   showSettings.value = false
@@ -311,6 +321,7 @@ function cancelSettings() {
   breakInput.value = BREAK_DURATION.value / 60
   longBreakInput.value = LONG_BREAK_DURATION.value / 60
   longBreakRoundInput.value = LONG_BREAK_ROUND.value
+  sysNotifyInput.value = SYS_NOTIFY.value
   showSettings.value = false
 }
 
@@ -319,11 +330,13 @@ onMounted(async () => {
   breakInput.value = await getSetting('break', DEFAULT_BREAK)
   longBreakInput.value = await getSetting('longBreak', DEFAULT_LONG_BREAK)
   longBreakRoundInput.value = await getSetting('longBreakRound', DEFAULT_LONG_BREAK_ROUND)
+  sysNotifyInput.value = await getSetting('sysNotify', DEFAULT_SYS_NOTIFY)
 
   WORK_DURATION.value = workInput.value * 60
   BREAK_DURATION.value = breakInput.value * 60
   LONG_BREAK_DURATION.value = longBreakInput.value * 60
   LONG_BREAK_ROUND.value = longBreakRoundInput.value
+  SYS_NOTIFY.value = sysNotifyInput.value
 
   if (!started.value) {
     timeLeft.value = isWork.value ? WORK_DURATION.value : BREAK_DURATION.value
@@ -424,10 +437,11 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   margin-bottom: 18px;
+  margin-top: 10px;
 }
 .setting-item label {
   flex: 1;
-  text-align: right;
+  text-align: left;
   margin-right: 10px;
   color: #bfc9d4;
 }
