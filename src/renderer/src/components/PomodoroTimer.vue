@@ -28,65 +28,70 @@
       <svg v-if="!isLight" t="1754709424697" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2538" width="35" height="35"><path d="M419.037 287.953h413.124c17.673 0 32-14.327 32-32s-14.327-32-32-32H419.037c-17.673 0-32 14.327-32 32s14.327 32 32 32zM419.028 543.17h411.608c17.673 0 32-14.327 32-32s-14.327-32-32-32H419.028c-17.673 0-32 14.327-32 32s14.327 32 32 32zM832.161 735.802H419.037c-17.673 0-32 14.327-32 32s14.327 32 32 32h413.124c17.673 0 32-14.327 32-32s-14.327-32-32-32z" fill="#bfbfbf" p-id="2539"></path><path d="M256.037 255.953m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#bfbfbf" p-id="2540"></path><path d="M256.037 510.787m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#bfbfbf" p-id="2541"></path><path d="M256.037 767.621m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#bfbfbf" p-id="2542"></path></svg>
       <svg v-else t="1754709424697" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2538" width="35" height="35"><path d="M419.037 287.953h413.124c17.673 0 32-14.327 32-32s-14.327-32-32-32H419.037c-17.673 0-32 14.327-32 32s14.327 32 32 32zM419.028 543.17h411.608c17.673 0 32-14.327 32-32s-14.327-32-32-32H419.028c-17.673 0-32 14.327-32 32s14.327 32 32 32zM832.161 735.802H419.037c-17.673 0-32 14.327-32 32s14.327 32 32 32h413.124c17.673 0 32-14.327 32-32s-14.327-32-32-32z" fill="#515151" p-id="2539"></path><path d="M256.037 255.953m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#515151" p-id="2540"></path><path d="M256.037 510.787m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#515151" p-id="2541"></path><path d="M256.037 767.621m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#515151" p-id="2542"></path></svg>
     </div>
-    <div v-if="showSettings" class="settings-modal">
-      <div class="settings-content">
-        <h3>番茄钟设置</h3>
-        <div class="setting-item">
-          <label>工作时长(分钟)：</label>
-          <input type="number" min="1" v-model.number="workInput" />
-        </div>
-        <div class="setting-item">
-          <label>休息时长(分钟)：</label>
-          <input type="number" min="1" v-model.number="breakInput" />
-        </div>
-        <div class="setting-item">
-          <label>长休息时长(分钟)：</label>
-          <input type="number" min="1" v-model.number="longBreakInput" />
-        </div>
-        <div class="setting-item">
-          <label>长休息轮数：</label>
-          <input type="number" min="1" v-model.number="longBreakRoundInput" />
-        </div>
-        <div class="settings-actions">
-          <button @click="applySettings">确定</button>
-          <button @click="cancelSettings">取消</button>
-        </div>
-      </div>
-    </div>
-    <div v-if="showWhiteNoise" class="white-noise-modal">
-      <div class="white-noise-content">
-        <h3>白噪声播放</h3>
-        <div class="white-noise-list">
-          <div
-            v-for="sound in sounds"
-            :key="sound.key"
-            class="white-noise-card"
-            :class="{ playing: playingList[sound.key] }"
-            @click="toggleSound(sound.key)"
-          >
-            <!-- <button class="favorite-btn" title="收藏">
-              <span aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412l7.332 7.332c.17.299.498.492.875.492a.99.99 0 0 0 .792-.409l7.415-7.415c2.354-2.354 2.354-6.049-.002-8.416a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595zm6.791 1.61c1.563 1.571 1.564 4.025.002 5.588L12 18.586l-6.793-6.793c-1.562-1.563-1.561-4.017-.002-5.584.76-.756 1.754-1.172 2.799-1.172s2.035.416 2.789 1.17l.5.5a.999.999 0 0 0 1.414 0l.5-.5c1.512-1.509 4.074-1.505 5.584-.002z"></path></svg>
-              </span>
-            </button> -->
-            <div class="icon" v-html="isLight ? soundIcons[sound.key].light : soundIcons[sound.key].dark"></div>
-            <div class="label">{{ sound.label }}</div>
-            <input
-              type="range"
-              min="0"
-              max="100"
-              :value="volumes[sound.key]"
-              @input.stop="setVolume(sound.key, $event.target.value)"
-              :disabled="!playingList[sound.key]"
-              aria-label="音量"
-            />
+    <transition name="menu-fade">
+      <div v-if="showSettings" class="settings-modal">
+        <div class="settings-content">
+          <h3>番茄钟设置</h3>
+          <div class="setting-item">
+            <label>工作时长(分钟)：</label>
+            <input type="number" min="1" v-model.number="workInput" />
+          </div>
+          <div class="setting-item">
+            <label>休息时长(分钟)：</label>
+            <input type="number" min="1" v-model.number="breakInput" />
+          </div>
+          <div class="setting-item">
+            <label>长休息时长(分钟)：</label>
+            <input type="number" min="1" v-model.number="longBreakInput" />
+          </div>
+          <div class="setting-item">
+            <label>长休息轮数：</label>
+            <input type="number" min="1" v-model.number="longBreakRoundInput" />
+          </div>
+          <div class="settings-actions">
+            <button @click="applySettings">确定</button>
+            <button @click="cancelSettings">取消</button>
           </div>
         </div>
-        <div class="white-noise-actions">
-          <button @click="closeWhiteNoise">关闭</button>
+      </div>
+    </transition>
+    <transition name="menu-fade">
+      <div v-if="showWhiteNoise" class="white-noise-modal">
+        <div class="white-noise-content">
+          <h3>白噪声播放</h3>
+          <div class="white-noise-list">
+            <div
+              v-for="sound in sounds"
+              :key="sound.key"
+              class="white-noise-card"
+              :class="{ playing: playingList[sound.key] }"
+              @click="toggleSound(sound.key)"
+            >
+              <!-- <button class="favorite-btn" title="收藏">
+                <span aria-hidden="true">
+                  <svg width="10" height="10" viewBox="0 0 24 24"><path d="M12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412l7.332 7.332c.17.299.498.492.875.492a.99.99 0 0 0 .792-.409l7.415-7.415c2.354-2.354 2.354-6.049-.002-8.416a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595zm6.791 1.61c1.563 1.571 1.564 4.025.002 5.588L12 18.586l-6.793-6.793c-1.562-1.563-1.561-4.017-.002-5.584.76-.756 1.754-1.172 2.799-1.172s2.035.416 2.789 1.17l.5.5a.999.999 0 0 0 1.414 0l.5-.5c1.512-1.509 4.074-1.505 5.584-.002z"></path></svg>
+                </span>
+              </button> -->
+              <div class="icon" v-html="isLight ? soundIcons[sound.key].light : soundIcons[sound.key].dark"></div>
+              <div class="label">{{ sound.label }}</div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                :value="volumes[sound.key]"
+                @input.stop="setVolume(sound.key, $event.target.value)"
+                @click.stop
+                :disabled="!playingList[sound.key]"
+                aria-label="音量"
+              />
+            </div>
+          </div>
+          <div class="white-noise-actions">
+            <button @click="closeWhiteNoise">关闭</button>
+          </div>
         </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -537,9 +542,13 @@ body.light .white-noise-content {
 .white-noise-list {
   display: flex;
   gap: 18px;
-  margin: 18px 0 10px 0;
+  margin: 15px 0 10px 0;
   flex-wrap: wrap;
   justify-content: center;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 .white-noise-card {
   background: #2f3241;
@@ -605,5 +614,26 @@ body.light .white-noise-actions button:hover {
   background: #e0e0e0;
   color: #2f3241;
   border-color: #007acc;
+}
+
+.menu-fade-enter-active,
+.menu-fade-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+.menu-fade-enter-from {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.menu-fade-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+.menu-fade-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+.menu-fade-leave-to {
+  opacity: 0;
+  transform: translateY(40px);
 }
 </style>
