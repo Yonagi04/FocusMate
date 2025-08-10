@@ -10,9 +10,34 @@
     </h3>
     <div class="timer">{{ minutes }}:{{ seconds }}</div>
     <div class="actions">
-      <button @click="startTimer" :disabled="running">开始</button>
-      <button @click="pauseTimer" :disabled="!running">暂停</button>
-      <button @click="resetTimer">重置</button>
+      <transition name="button-fade" mode="out-in">
+        <button
+          v-if="!started || (!running && started)" 
+          @click="startTimer"
+          key="start"
+          class="action-btn start-btn"
+        >
+          开始
+        </button>
+        <button
+          v-else-if="running"
+          @click="pauseTimer"
+          key="pause"
+          class="action-btn pause-btn"
+        >
+          暂停
+        </button>
+      </transition>
+      <transition name="button-slide" mode="out-in">
+        <button
+          v-if="started" 
+          @click="endTimer"
+          key="end"
+          class="action-btn end-btn"
+        >
+          结束
+        </button>
+      </transition>
     </div>
     <div class="bottom-btns">
       <div class="settings-btn" @click="showSettings = true" title="设置">
@@ -226,15 +251,6 @@ function applyTheme(themeMode) {
   }
 }
 
-// function toggleTheme() {
-//   isLight.value = !isLight.value
-//   if (isLight.value) {
-//     document.body.classList.add('light')
-//   } else {
-//     document.body.classList.remove('light')
-//   }
-// }
-
 function toggleSound(key) {
   if (!audioMap[key]) {
     audioMap[key] = new Audio(sounds.find(s => s.key === key).src)
@@ -259,10 +275,6 @@ function setVolume(key, val) {
 }
 
 function closeWhiteNoise() {
-  // Object.keys(audioMap).forEach(key => {
-  //   audioMap[key].pause()
-  //   playingList.value[key] = false
-  // })
   showWhiteNoise.value = false
 }
 
@@ -320,6 +332,24 @@ function resetTimer() {
   } else {
     timeLeft.value = isWork.value ? WORK_DURATION.value : BREAK_DURATION.value
   }
+}
+
+function endTimer() {
+  if (running.value) {
+    // 弹窗提示
+    if (confirm('当前计时器正在运行，是否要结束？')) {
+      pauseTimer()
+    } else {
+      return
+    }
+  }
+  pauseTimer()
+  // 回到开始之前的状态
+  started.value = false
+  running.value = false
+  round.value = 1
+  isWork.value = true
+  timeLeft.value = WORK_DURATION.value
 }
 
 function switchMode() {
@@ -423,14 +453,159 @@ onMounted(async () => {
   font-family: 'Consolas', 'Menlo', 'Monaco', monospace;
   letter-spacing: 2px;
 }
-.actions {
-  margin-top: 16px;
+
+.action-btn {
+  margin: 0 16px;
+  padding: 12px 20px;
+  font-size: 1em;
+  border-radius: 36px; /* 圆角矩形 */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
 }
-.actions button:not(:disabled):hover {
+
+.action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.actions {
+  margin-top: 32px;
+}
+
+/* 开始按钮：蓝色底白色字体 */
+.start-btn {
+  background: #007acc;
+  color: white;
+  border-color: #007acc;
+}
+
+.start-btn:hover {
+  background: #005a9e;
+  border-color: #005a9e;
+}
+
+/* 暂停按钮：白色底蓝色字体，蓝色边框 */
+.pause-btn {
+  background: white;
+  color: #007acc;
+  border-color: #007acc;
+}
+
+.pause-btn:hover {
+  background: #f0f8ff;
+  border-color: #005a9e;
+  color: #005a9e;
+}
+
+/* 结束按钮：和暂停一样 */
+.end-btn {
+  background: white;
+  color: #007acc;
+  border-color: #007acc;
+}
+
+.end-btn:hover {
+  background: #f0f8ff;
+  border-color: #005a9e;
+  color: #005a9e;
+}
+
+/* 浅色模式下的按钮样式 */
+body.light .start-btn {
+  background: #007acc;
+  color: white;
+  border-color: #007acc;
+}
+
+body.light .start-btn:hover {
+  background: #005a9e;
+  border-color: #005a9e;
+}
+
+body.light .pause-btn,
+body.light .end-btn {
+  background: white;
+  color: #007acc;
+  border-color: #007acc;
+}
+
+body.light .pause-btn:hover,
+body.light .end-btn:hover {
+  background: #f0f8ff;
+  border-color: #005a9e;
+  color: #005a9e;
+}
+
+/* 按钮淡入淡出动画 */
+.button-fade-enter-active,
+.button-fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+.button-fade-enter-from {
+  opacity: 0;
+  transform: scale(0.8) translateY(10px);
+}
+
+.button-fade-enter-to {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.button-fade-leave-from {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.button-fade-leave-to {
+  opacity: 0;
+  transform: scale(0.8) translateY(-10px);
+}
+
+/* 结束按钮滑入滑出动画 */
+.button-slide-enter-active,
+.button-slide-leave-active {
+  transition: all 0.3s ease;
+}
+
+.button-slide-enter-from {
+  opacity: 0;
+  transform: translateX(-20px) scale(0.9);
+}
+
+.button-slide-enter-to {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.button-slide-leave-from {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.button-slide-leave-to {
+  opacity: 0;
+  transform: translateX(20px) scale(0.9);
+}
+
+/* 结束按钮特殊动画：点击后快速消失 */
+.button-slide-leave-active.end-leaving {
+  transition: all 0.2s ease;
+}
+
+.button-slide-leave-to.end-leaving {
+  opacity: 0;
+  transform: translateX(30px) scale(0.7);
+}
+
+/* .actions button:not(:disabled):hover {
   background: #49507a;
   border-color: #6c7ae0;
   color: #fff;
-}
+} */
 body.light .actions button:not(:disabled):hover {
   background: #e0e0e0;
   border-color: #bbb;
