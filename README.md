@@ -1,44 +1,41 @@
 # FocusMate
 
-一个基于 Electron 构建的番茄工作法桌面应用，支持白噪声播放与到时提醒，帮助用户专注工作，提高效率。
+[中文版](README_CN.md) [日本語版](README_JP.md)
 
-（仍在开发中，部分功能不完善）
+FocusMate is a daily planning and focus timer application built with Electron.
+It supports white noise playback, reminders, and xschedule planning, helping users stay focused and boost productivity.
 
-## 功能特性
+*(Still under development — some features are not yet complete)*
 
-- ✅ 支持番茄钟计时（默认25分钟工作 + 5分钟休息）
+*(Currently only supports Chinese, more languages will be supported in the future)*
 
-- ✅ 时间自定义设置（工作/短休/长休时间可调）
+## Features
 
-- ✅ 白噪声播放
+- ✅ Pomodoro timer (default 25-minute work + 5-minute break)
+- ✅ Customizable durations (adjustable work/short break/long break times)
+- ✅ White noise playback
+- ✅ Time-up sound alerts + desktop notifications
+- ✅ Automatic cycle management (long break after every 4 cycles)
+- ✅ Dark / light UI themes
+- ✅ Persistent settings storage
+- ✅ Task management
+- ✅ Daily focus time & completed task statistics
 
-- ✅ 时间到时音效提醒 + 桌面通知
+## Installation & Usage
 
-- ✅ 自动轮次管理（每4轮后长休息）
-
-- ✅ 深色 / 浅色 UI 切换
-
-- ✅ 设置项本地持久化保存
-
-- ✅ 任务管理
-
-- ✅ 每日专注时间/完成任务统计
-
-## 安装与使用
-
-### 安装依赖
+### Install dependencies
 
 ```bash
 npm install
 ```
 
-### 启动开发环境
+### Start development environment
 
 ```bash
 npm run dev
 ```
 
-### 打包构建
+### Build for production
 
 ```bash
 # Windows
@@ -50,3 +47,6 @@ npm run build:mac
 # Linux
 npm run build:linux
 ```
+## License
+
+MIT License. Copyright (c) 2025 Yonagi04.
