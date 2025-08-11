@@ -1,0 +1,254 @@
+.pomodoro-timer {
+  text-align: center;
+  margin: 40px auto;
+  padding: 24px 0;
+  position: relative;
+}
+
+.timer {
+  font-size: 3em;
+  margin: 20px 0;
+  font-family: 'Consolas', 'Menlo', 'Monaco', monospace;
+  letter-spacing: 2px;
+}
+
+.action-btn {
+  margin: 0 16px;
+  padding: 12px 20px;
+  font-size: 1em;
+  border-radius: 36px;
+  /* 圆角矩形 */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.actions {
+  margin-top: 32px;
+}
+
+/* 开始按钮：蓝色底白色字体 */
+.start-btn {
+  background: #007acc;
+  color: white;
+  border-color: #007acc;
+}
+
+.start-btn:hover {
+  background: #005a9e;
+  border-color: #005a9e;
+}
+
+/* 暂停按钮：白色底蓝色字体，蓝色边框 */
+.pause-btn {
+  background: white;
+  color: #007acc;
+  border-color: #007acc;
+}
+
+.pause-btn:hover {
+  background: #f0f8ff;
+  border-color: #005a9e;
+  color: #005a9e;
+}
+
+/* 结束按钮：和暂停一样 */
+.end-btn {
+  background: white;
+  color: #007acc;
+  border-color: #007acc;
+}
+
+.end-btn:hover {
+  background: #f0f8ff;
+  border-color: #005a9e;
+  color: #005a9e;
+}
+
+/* 浅色模式下的按钮样式 */
+body.light .start-btn {
+  background: #007acc;
+  color: white;
+  border-color: #007acc;
+}
+
+body.light .start-btn:hover {
+  background: #005a9e;
+  border-color: #005a9e;
+}
+
+body.light .pause-btn,
+body.light .end-btn {
+  background: white;
+  color: #007acc;
+  border-color: #007acc;
+}
+
+body.light .pause-btn:hover,
+body.light .end-btn:hover {
+  background: #f0f8ff;
+  border-color: #005a9e;
+  color: #005a9e;
+}
+
+/* 按钮淡入淡出动画 */
+.button-fade-enter-active,
+.button-fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+.button-fade-enter-from {
+  opacity: 0;
+  transform: scale(0.8) translateY(10px);
+}
+
+.button-fade-enter-to {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.button-fade-leave-from {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.button-fade-leave-to {
+  opacity: 0;
+  transform: scale(0.8) translateY(-10px);
+}
+
+/* 结束按钮滑入滑出动画 */
+.button-slide-enter-active,
+.button-slide-leave-active {
+  transition: all 0.3s ease;
+}
+
+.button-slide-enter-from {
+  opacity: 0;
+  transform: translateX(-20px) scale(0.9);
+}
+
+.button-slide-enter-to {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.button-slide-leave-from {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.button-slide-leave-to {
+  opacity: 0;
+  transform: translateX(20px) scale(0.9);
+}
+
+/* 结束按钮特殊动画：点击后快速消失 */
+.button-slide-leave-active.end-leaving {
+  transition: all 0.2s ease;
+}
+
+.button-slide-leave-to.end-leaving {
+  opacity: 0;
+  transform: translateX(30px) scale(0.7);
+}
+
+/* .actions button:not(:disabled):hover {
+    background: #49507a;
+    border-color: #6c7ae0;
+    color: #fff;
+  } */
+body.light .actions button:not(:disabled):hover {
+  background: #e0e0e0;
+  border-color: #bbb;
+  color: #2f3241;
+}
+
+.bottom-btns {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 12px;
+  z-index: 100;
+}
+
+.settings-btn,
+.theme-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.white-noise-btn {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  padding: 0;
+  box-sizing: border-box;
+  z-index: 101;
+}
+
+.settings-btn:hover,
+.theme-btn:hover,
+.white-noise-btn:hover {
+  opacity: 1;
+}
+
+.settings-btn .icon,
+.theme-btn .icon,
+.white-noise-btn .icon,
+.settings-btn svg,
+.theme-btn svg,
+.white-noise-btn svg {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-fade-enter-active,
+.menu-fade-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.menu-fade-enter-from {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.menu-fade-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-fade-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-fade-leave-to {
+  opacity: 0;
+  transform: translateY(40px);
+}

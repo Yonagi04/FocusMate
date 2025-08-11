@@ -1,6 +1,6 @@
 # FocusMate
 
-[中文版](README_CN.md) [日本語版](README_JP.md)
+[中文版](README_CN.md) | [日本語版](README_JP.md)
 
 FocusMate is a daily planning and focus timer application built with Electron.
 It supports white noise playback, reminders, and xschedule planning, helping users stay focused and boost productivity.

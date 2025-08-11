@@ -8,7 +8,7 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     title: 'FocusMate',
     width: 400,
-    height: 500,
+    height: 550,
     resizable: false,
     show: false,
     autoHideMenuBar: true,
