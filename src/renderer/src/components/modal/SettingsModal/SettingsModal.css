@@ -11,8 +11,8 @@
 
 /* 深色模式（默认）设置页 */
 .settings-content {
-  background: #23263a;
-  color: #e0e6f0;
+  background: rgb(35, 39, 46);
+  color: #b9c9cf;
   border-radius: 10px;
   padding: 32px 24px 20px 24px;
   min-width: 300px;
@@ -36,7 +36,7 @@
   font-size: 1em;
   border-radius: 4px;
   border: 1px solid #3a3f5a;
-  background: #23263a;
+  background: rgb(35, 39, 46);
   color: #e0e6f0;
 }
 .settings-actions {

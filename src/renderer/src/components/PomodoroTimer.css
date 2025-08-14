@@ -124,7 +124,7 @@ body.light .end-btn:hover {
   transform: scale(0.8) translateY(-10px);
 }
 
-/* 结束按钮滑入滑出动画 */
+/* 结束按钮使用与暂停按钮相同的动画 */
 .button-slide-enter-active,
 .button-slide-leave-active {
   transition: all 0.3s ease;
@@ -132,39 +132,34 @@ body.light .end-btn:hover {
 
 .button-slide-enter-from {
   opacity: 0;
-  transform: translateX(-20px) scale(0.9);
+  transform: scale(0.8) translateY(10px);
 }
 
 .button-slide-enter-to {
   opacity: 1;
-  transform: translateX(0) scale(1);
+  transform: scale(1) translateY(0);
 }
 
 .button-slide-leave-from {
   opacity: 1;
-  transform: translateX(0) scale(1);
+  transform: scale(1) translateY(0);
 }
 
 .button-slide-leave-to {
   opacity: 0;
-  transform: translateX(20px) scale(0.9);
+  transform: scale(0.8) translateY(-10px);
 }
 
 /* 结束按钮特殊动画：点击后快速消失 */
-.button-slide-leave-active.end-leaving {
+/* .button-slide-leave-active.end-leaving {
   transition: all 0.2s ease;
-}
+} */
 
 .button-slide-leave-to.end-leaving {
   opacity: 0;
-  transform: translateX(30px) scale(0.7);
+  transform: scale(0.8) translateY(-10px);
 }
 
-/* .actions button:not(:disabled):hover {
-    background: #49507a;
-    border-color: #6c7ae0;
-    color: #fff;
-  } */
 body.light .actions button:not(:disabled):hover {
   background: #e0e0e0;
   border-color: #bbb;
@@ -211,44 +206,39 @@ body.light .actions button:not(:disabled):hover {
   z-index: 101;
 }
 
+.note-btn {
+  position: fixed;
+  right: 65px;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  padding: 0;
+  box-sizing: border-box;
+  z-index: 101;
+}
+
 .settings-btn:hover,
 .theme-btn:hover,
-.white-noise-btn:hover {
+.white-noise-btn:hover,
+.note-btn:hover {
   opacity: 1;
 }
 
 .settings-btn .icon,
 .theme-btn .icon,
 .white-noise-btn .icon,
+.note-btn .icon,
 .settings-btn svg,
 .theme-btn svg,
-.white-noise-btn svg {
+.white-noise-btn svg,
+.note-btn svg {
   display: block;
   margin: 0;
   padding: 0;
-}
-
-.menu-fade-enter-active,
-.menu-fade-leave-active {
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.menu-fade-enter-from {
-  opacity: 0;
-  transform: translateY(40px);
-}
-
-.menu-fade-enter-to {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.menu-fade-leave-from {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.menu-fade-leave-to {
-  opacity: 0;
-  transform: translateY(40px);
 }

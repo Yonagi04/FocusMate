@@ -1,5 +1,5 @@
 :root {
-  --el-bg-color: #23263a;
+  --el-bg-color: rgb(35, 39, 46);
   --el-bg-color-overlay: #23263a;
   --el-text-color-primary: #e0e6f0;
   --el-text-color-regular: #23263a;
@@ -46,7 +46,7 @@ body.light {
 }
 
 .el-select-dropdown {
-  background-color: #23263a !important;
+  background-color: rgb(35, 39, 46) !important;
   border-color: #3a3f5a !important;
 }
 

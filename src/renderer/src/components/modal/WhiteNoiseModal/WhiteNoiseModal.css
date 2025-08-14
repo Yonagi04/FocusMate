@@ -16,8 +16,8 @@ body.light .white-noise-modal {
 }
 
 .white-noise-content {
-  background: #23263a;
-  color: #e0e6f0;
+  background: rgb(35, 39, 46);
+  color: #b9c9cf;
   border-radius: 10px;
   padding: 32px 24px 20px 24px;
   min-width: 340px;
@@ -43,7 +43,8 @@ body.light .white-noise-content {
 }
 
 .white-noise-card {
-  background: #2f3241;
+  background: rgb(51, 57, 67);
+  border: #49507a;
   border-radius: 8px;
   padding: 18px 16px 12px 16px;
   min-width: 120px;
