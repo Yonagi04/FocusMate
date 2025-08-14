@@ -1,0 +1,24 @@
+.menu-fade-enter-active,
+.menu-fade-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.menu-fade-enter-from {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.menu-fade-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-fade-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-fade-leave-to {
+  opacity: 0;
+  transform: translateY(40px);
+}

@@ -53,6 +53,10 @@
       <svg v-if="!isLight" t="1754709424697" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2538" width="35" height="35"><path d="M419.037 287.953h413.124c17.673 0 32-14.327 32-32s-14.327-32-32-32H419.037c-17.673 0-32 14.327-32 32s14.327 32 32 32zM419.028 543.17h411.608c17.673 0 32-14.327 32-32s-14.327-32-32-32H419.028c-17.673 0-32 14.327-32 32s14.327 32 32 32zM832.161 735.802H419.037c-17.673 0-32 14.327-32 32s14.327 32 32 32h413.124c17.673 0 32-14.327 32-32s-14.327-32-32-32z" fill="#bfbfbf" p-id="2539"></path><path d="M256.037 255.953m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#bfbfbf" p-id="2540"></path><path d="M256.037 510.787m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#bfbfbf" p-id="2541"></path><path d="M256.037 767.621m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#bfbfbf" p-id="2542"></path></svg>
       <svg v-else t="1754709424697" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2538" width="35" height="35"><path d="M419.037 287.953h413.124c17.673 0 32-14.327 32-32s-14.327-32-32-32H419.037c-17.673 0-32 14.327-32 32s14.327 32 32 32zM419.028 543.17h411.608c17.673 0 32-14.327 32-32s-14.327-32-32-32H419.028c-17.673 0-32 14.327-32 32s14.327 32 32 32zM832.161 735.802H419.037c-17.673 0-32 14.327-32 32s14.327 32 32 32h413.124c17.673 0 32-14.327 32-32s-14.327-32-32-32z" fill="#515151" p-id="2539"></path><path d="M256.037 255.953m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#515151" p-id="2540"></path><path d="M256.037 510.787m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#515151" p-id="2541"></path><path d="M256.037 767.621m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#515151" p-id="2542"></path></svg>
     </div>
+    <div class = "note-btn" @click="showNote = true" title="随心笔记">
+      <svg v-if="!isLight" t="1755006983493" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2706" width="32" height="32"><path d="M746.666667 64a170.666667 170.666667 0 0 1 170.666666 170.666667v554.666666a170.666667 170.666667 0 0 1-170.666666 170.666667H298.666667a170.666667 170.666667 0 0 1-170.666667-170.666667V234.666667a170.666667 170.666667 0 0 1 170.666667-170.666667h448z m0 74.666667H298.666667a96 96 0 0 0-95.893334 91.477333L202.666667 234.666667v554.666666a96 96 0 0 0 91.477333 95.893334L298.666667 885.333333h448a96 96 0 0 0 95.893333-91.477333L842.666667 789.333333V234.666667a96 96 0 0 0-91.477334-95.893334L746.666667 138.666667z" fill="#bfbfbf" p-id="2707"></path><path d="M224 325.333333a37.333333 37.333333 0 0 1 3.072 74.538667l-3.072 0.128H106.666667a37.333333 37.333333 0 0 1-3.072-74.538667L106.666667 325.333333h117.333333zM224 624a37.333333 37.333333 0 0 1 3.072 74.538667l-3.072 0.128H106.666667a37.333333 37.333333 0 0 1-3.072-74.538667L106.666667 624h117.333333zM693.333333 346.666667a37.333333 37.333333 0 0 1 37.205334 34.261333l0.128 3.072v256a37.333333 37.333333 0 0 1-74.538667 3.072L656 640V384c0-20.608 16.725333-37.333333 37.333333-37.333333z" fill="#bfbfbf" p-id="2708"></path></svg>
+      <svg v-else t="1755006983493" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2706" width="32" height="32"><path d="M746.666667 64a170.666667 170.666667 0 0 1 170.666666 170.666667v554.666666a170.666667 170.666667 0 0 1-170.666666 170.666667H298.666667a170.666667 170.666667 0 0 1-170.666667-170.666667V234.666667a170.666667 170.666667 0 0 1 170.666667-170.666667h448z m0 74.666667H298.666667a96 96 0 0 0-95.893334 91.477333L202.666667 234.666667v554.666666a96 96 0 0 0 91.477333 95.893334L298.666667 885.333333h448a96 96 0 0 0 95.893333-91.477333L842.666667 789.333333V234.666667a96 96 0 0 0-91.477334-95.893334L746.666667 138.666667z" fill="#707070" p-id="2707"></path><path d="M224 325.333333a37.333333 37.333333 0 0 1 3.072 74.538667l-3.072 0.128H106.666667a37.333333 37.333333 0 0 1-3.072-74.538667L106.666667 325.333333h117.333333zM224 624a37.333333 37.333333 0 0 1 3.072 74.538667l-3.072 0.128H106.666667a37.333333 37.333333 0 0 1-3.072-74.538667L106.666667 624h117.333333zM693.333333 346.666667a37.333333 37.333333 0 0 1 37.205334 34.261333l0.128 3.072v256a37.333333 37.333333 0 0 1-74.538667 3.072L656 640V384c0-20.608 16.725333-37.333333 37.333333-37.333333z" fill="#707070" p-id="2708"></path></svg>
+    </div>
     <transition name="menu-fade">
       <SettingsModal
         v-if="showSettings"
@@ -70,6 +74,20 @@
     <transition name="menu-fade">
       <WhiteNoiseModal v-if="showWhiteNoise" :isLight="isLight" @close="closeWhiteNoise" />
     </transition>
+    <transition name="menu-fade">
+      <NoteModal v-if="showNote" :isLight="isLight" @close="closeNote" />
+    </transition>
+    
+    <!-- 确认结束计时器的对话框 -->
+    <transition name="menu-fade">
+      <CustomConfirm
+        :visible="showEndConfirm"
+        message="当前计时器正在运行，是否要结束？"
+        @confirm="confirmEndTimer"
+        @cancel="showEndConfirm = false"
+        @close="showEndConfirm = false"
+      />
+    </transition>
   </div>
 </template>
 
@@ -77,6 +95,8 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import WhiteNoiseModal from './modal/whiteNoiseModal/WhiteNoiseModal.vue'
 import SettingsModal from './modal/SettingsModal/SettingsModal.vue'
+import NoteModal from './modal/NoteModal/NoteModal.vue'
+import CustomConfirm from './common/CustomConfirm.vue'
 import { showNotification } from '../utils/index.js'
 
 async function getSetting(key, def) {
@@ -114,15 +134,18 @@ const timeLeft = ref(WORK_DURATION.value)
 const running = ref(false)
 const started = ref(false)
 const round = ref(1)
-let timer = null
-
-const showSettings = ref(false)
 
 const minutes = computed(() => String(Math.floor(timeLeft.value / 60)).padStart(2, '0'))
 const seconds = computed(() => String(timeLeft.value % 60).padStart(2, '0'))
 
-const isLight = ref(false)
+let timer = null
+
+const showSettings = ref(false)
 const showWhiteNoise = ref(false)
+const showNote = ref(false)
+const showEndConfirm = ref(false)
+
+const isLight = ref(false)
 
 let cleanupSystemThemeListener = null
 
@@ -155,6 +178,10 @@ function applyTheme(themeMode) {
 
 function closeWhiteNoise() {
   showWhiteNoise.value = false
+}
+
+function closeNote() {
+  showNote.value = false
 }
 
 function startTimer() {
@@ -203,13 +230,21 @@ function resetTimer() {
 
 function endTimer() {
   if (running.value) {
-    // 弹窗提示
-    if (confirm('当前计时器正在运行，是否要结束？')) {
-      pauseTimer()
-    } else {
-      return
-    }
+    // 显示自定义确认对话框
+    showEndConfirm.value = true
+    return
   }
+  pauseTimer()
+  // 回到开始之前的状态
+  started.value = false
+  running.value = false
+  round.value = 1
+  isWork.value = true
+  timeLeft.value = WORK_DURATION.value
+}
+
+function confirmEndTimer() {
+  showEndConfirm.value = false
   pauseTimer()
   // 回到开始之前的状态
   started.value = false
@@ -302,4 +337,5 @@ onMounted(async () => {
 
 <style scoped>
   @import './PomodoroTimer.css';
+  @import '../../src/assets/css/animation.css'
 </style>
