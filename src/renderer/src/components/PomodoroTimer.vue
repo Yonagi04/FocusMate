@@ -72,7 +72,7 @@
       />
     </transition>
     <transition name="menu-fade">
-      <WhiteNoiseModal v-if="showWhiteNoise" :isLight="isLight" @close="closeWhiteNoise" />
+      <WhiteNoiseModal v-show="showWhiteNoise" :isLight="isLight" @close="closeWhiteNoise" />
     </transition>
     <transition name="menu-fade">
       <NoteModal v-if="showNote" :isLight="isLight" @close="closeNote" />
@@ -112,8 +112,8 @@ function setSetting(key, value) {
   window.settingsAPI.set(key, value)
 }
 
-const Store = window.require ? window.require('electron-store') : null
-const store = Store ? new Store({ name: 'pomodoro-settings' }) : null
+// const Store = window.require ? window.require('electron-store') : null
+// const store = Store ? new Store({ name: 'pomodoro-settings' }) : null
 
 const DEFAULT_WORK = 25 // 默认工作时长 25分钟
 const DEFAULT_BREAK = 5 // 默认休息时长 5分钟

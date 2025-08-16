@@ -20,9 +20,8 @@
           <!-- <button 
             class="action-btn markdown-btn" 
             @click="toggleMarkdownMode"
-            title="点击进入Markdown编辑器"
           >
-            进入Markdown模式
+            {{ isMarkdownMode ? '进入富文本模式' : '进入Markdown模式' }}
           </button> -->
           <button 
             class="action-btn export-btn" 
@@ -67,7 +66,6 @@ const props = defineProps({
 const emit = defineEmits(['close'])
 
 const noteContent = ref('')
-const isMarkdownMode = ref(false)
 const isSaving = ref(false)
 const lastSaved = ref(null)
 const noteTextarea = ref(null)
@@ -172,44 +170,6 @@ function stopAutoSave() {
   if (idleSaveInterval) {
     clearInterval(idleSaveInterval)
     idleSaveInterval = null
-  }
-}
-
-// 进入Markdown模式
-async function toggleMarkdownMode() {
-  try {
-    // 先保存当前内容
-    await saveNoteContent()
-    
-    // 打开Markdown编辑器窗口
-    if (typeof window !== 'undefined' && window.markdownAPI) {
-      await window.markdownAPI.openEditor(noteContent.value)
-      // 关闭当前笔记面板，返回主页
-      emit('close')
-    } else if (typeof window !== 'undefined') {
-      // 备用方案：使用新窗口打开
-      const newWindow = window.open('', '_blank', 'width=800,height=600')
-      if (newWindow) {
-        newWindow.document.write(`
-          <html>
-            <head>
-              <title>Markdown编辑器</title>
-              <meta charset="utf-8">
-            </head>
-            <body>
-              <h1>Markdown编辑器</h1>
-              <p>当前笔记内容：</p>
-              <pre>${noteContent.value}</pre>
-            </body>
-          </html>
-        `)
-        newWindow.document.close()
-        emit('close')
-      }
-    }
-  } catch (error) {
-    console.error('打开Markdown编辑器失败:', error)
-    showCustomAlert('打开Markdown编辑器失败，请重试')
   }
 }
 

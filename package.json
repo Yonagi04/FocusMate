@@ -20,8 +20,10 @@
   "dependencies": {
     "@electron-toolkit/preload": "^2.0.0",
     "@electron-toolkit/utils": "^2.0.0",
+    "@kangc/v-md-editor": "^2.3.18",
     "electron-store": "^8.2.0",
-    "element-plus": "^2.10.6"
+    "element-plus": "^2.10.6",
+    "markdown-it": "^14.1.0"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.1",
