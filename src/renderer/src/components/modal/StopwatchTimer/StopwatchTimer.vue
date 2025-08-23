@@ -18,16 +18,21 @@
         </button>
       </transition>
       <transition name="button-slide" mode="out-in">
-        <button v-if="started" @click="resetTimer" key="reset" class="action-btn end-btn">
+        <button v-if="started" @click="endTimer" key="end" class="action-btn end-btn">
           重置
         </button>
       </transition>
     </div>
+    <transition name="menu-fade">
+      <CustomConfirm :visible="showEndConfirm" message="确定要结束正计时吗？" @confirm="confirmEndTimer"
+        @cancel="cancelEndTimer" @close="cancelEndTimer" />
+    </transition>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import CustomConfirm from '../../common/CustomConfirm.vue'
 const emit = defineEmits(['start', 'pause'])
 
 // 状态变量
@@ -42,6 +47,9 @@ const seconds = computed(() => String(timeElapsed.value % 60).padStart(2, '0'))
 
 // 计时器
 let timer = null
+
+// 重置弹窗
+const showEndConfirm = ref(false)
 
 // 开始计时
 function startTimer() {
@@ -65,6 +73,23 @@ function pauseTimer() {
 }
 
 // 重置计时
+function endTimer() {
+  if (running.value) {
+    showEndConfirm.value = true
+    return
+  }
+  resetTimer()
+}
+
+function confirmEndTimer() {
+  showEndConfirm.value = false
+  resetTimer()
+}
+
+function cancelEndTimer() {
+  showEndConfirm.value = false
+}
+
 function resetTimer() {
   pauseTimer()
   started.value = false
