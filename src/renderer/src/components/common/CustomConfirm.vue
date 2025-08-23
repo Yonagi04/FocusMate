@@ -1,5 +1,5 @@
 <template>
-  <div v-if="visible" class="custom-confirm-overlay" @click="handleOverlayClick">
+  <div v-if="visible" class="custom-confirm-overlay" @click="handleClose">
     <div class="custom-confirm" @click.stop>
       <div class="confirm-content">
         <p class="confirm-message">{{ message }}</p>
@@ -26,16 +26,16 @@ const props = defineProps({
 
 const emit = defineEmits(['confirm', 'cancel', 'close'])
 
-const handleOverlayClick = () => {
-  emit('close')
-}
-
 const handleConfirm = () => {
   emit('confirm')
 }
 
 const handleCancel = () => {
   emit('cancel')
+}
+
+const handleClose = () => {
+  emit('close')
 }
 </script>
 

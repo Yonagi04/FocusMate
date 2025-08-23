@@ -1,0 +1,83 @@
+.timer-panel {
+  text-align: center;
+  margin: 20px auto; /* 减少上边距，从40px改为20px */
+  padding: 24px 0;
+  position: relative;
+}
+
+.bottom-btns {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 12px;
+  z-index: 100;
+}
+
+.settings-btn,
+.theme-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.white-noise-btn {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  padding: 0;
+  box-sizing: border-box;
+  z-index: 101;
+}
+
+.note-btn {
+  position: fixed;
+  right: 65px;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  padding: 0;
+  box-sizing: border-box;
+  z-index: 101;
+}
+
+.settings-btn:hover,
+.theme-btn:hover,
+.white-noise-btn:hover,
+.note-btn:hover {
+  opacity: 1;
+}
+
+.settings-btn .icon,
+.theme-btn .icon,
+.white-noise-btn .icon,
+.note-btn .icon,
+.settings-btn svg,
+.theme-btn svg,
+.white-noise-btn svg,
+.note-btn svg {
+  display: block;
+  margin: 0;
+  padding: 0;
+}

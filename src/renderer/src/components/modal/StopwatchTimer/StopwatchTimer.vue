@@ -1,8 +1,84 @@
-.pomodoro-timer {
+<template>
+  <div class="stopwatch-timer">
+    <h2>
+      <template v-if="!started">欢迎使用正计时</template>
+      <template v-else>
+        <template v-if="!running">已暂停</template>
+        <template v-else>正在计时中...</template>
+      </template>
+    </h2>
+    <div class="timer">{{ hours }}:{{ minutes }}:{{ seconds }}</div>
+    <div class="actions">
+      <transition name="button-fade" mode="out-in">
+        <button v-if="!started || (!running && started)" @click="startTimer" key="start" class="action-btn start-btn">
+          开始
+        </button>
+        <button v-else-if="running" @click="pauseTimer" key="pause" class="action-btn pause-btn">
+          暂停
+        </button>
+      </transition>
+      <transition name="button-slide" mode="out-in">
+        <button v-if="started" @click="resetTimer" key="reset" class="action-btn end-btn">
+          重置
+        </button>
+      </transition>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed } from 'vue'
+const emit = defineEmits(['start', 'pause'])
+
+// 状态变量
+const timeElapsed = ref(0) // 已经过的时间（秒）
+const running = ref(false) // 是否正在运行
+const started = ref(false) // 是否已经开始
+
+// 计算属性：时、分、秒
+const hours = computed(() => String(Math.floor(timeElapsed.value / 3600)).padStart(2, '0'))
+const minutes = computed(() => String(Math.floor((timeElapsed.value % 3600) / 60)).padStart(2, '0'))
+const seconds = computed(() => String(timeElapsed.value % 60).padStart(2, '0'))
+
+// 计时器
+let timer = null
+
+// 开始计时
+function startTimer() {
+  if (running.value) return
+  running.value = true
+  started.value = true
+  emit('start')
+  timer = setInterval(() => {
+    timeElapsed.value++
+  }, 1000)
+}
+
+// 暂停计时
+function pauseTimer() {
+  running.value = false
+  emit('pause')
+  if (timer) {
+    clearInterval(timer)
+    timer = null
+  }
+}
+
+// 重置计时
+function resetTimer() {
+  pauseTimer()
+  started.value = false
+  timeElapsed.value = 0
+}
+</script>
+
+<style scoped>
+@import '../../../assets/css/animation.css';
+
+.stopwatch-timer {
   text-align: center;
-  margin: 40px auto;
+  margin: 0 auto;
   padding: 24px 0;
-  position: relative;
 }
 
 .timer {
@@ -30,9 +106,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.actions {
-  margin-top: 32px;
-}
 
 /* 开始按钮：蓝色底白色字体 */
 .start-btn {
@@ -150,10 +223,6 @@ body.light .end-btn:hover {
   transform: scale(0.8) translateY(-10px);
 }
 
-/* 结束按钮特殊动画：点击后快速消失 */
-/* .button-slide-leave-active.end-leaving {
-  transition: all 0.2s ease;
-} */
 
 .button-slide-leave-to.end-leaving {
   opacity: 0;
@@ -165,80 +234,4 @@ body.light .actions button:not(:disabled):hover {
   border-color: #bbb;
   color: #2f3241;
 }
-
-.bottom-btns {
-  position: fixed;
-  left: 16px;
-  bottom: 16px;
-  display: flex;
-  gap: 12px;
-  z-index: 100;
-}
-
-.settings-btn,
-.theme-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  width: 40px;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.white-noise-btn {
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  width: 40px;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-  padding: 0;
-  box-sizing: border-box;
-  z-index: 101;
-}
-
-.note-btn {
-  position: fixed;
-  right: 65px;
-  bottom: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 32px;
-  width: 32px;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-  padding: 0;
-  box-sizing: border-box;
-  z-index: 101;
-}
-
-.settings-btn:hover,
-.theme-btn:hover,
-.white-noise-btn:hover,
-.note-btn:hover {
-  opacity: 1;
-}
-
-.settings-btn .icon,
-.theme-btn .icon,
-.white-noise-btn .icon,
-.note-btn .icon,
-.settings-btn svg,
-.theme-btn svg,
-.white-noise-btn svg,
-.note-btn svg {
-  display: block;
-  margin: 0;
-  padding: 0;
-}
+</style>

@@ -45,12 +45,23 @@ import { homedir } from 'os'
 const store = new Store({ name: 'pomodoro-settings' })
 const noteStore = new Store({ name: 'pomodoro-notes' })
 
-ipcMain.handle('get-settings', (event, key) => {
-  return store.get(key)
+ipcMain.handle('get-settings', async (event, key) => {
+  try {
+    return store.get(key)
+  } catch (error) {
+    console.error('获取设置失败:', error)
+    return null
+  }
 })
 
-ipcMain.handle('set-settings', (event, key, value) => {
-  return store.set(key, value)
+ipcMain.handle('set-settings', async (event, key, value) => {
+  try {
+    store.set(key, value)
+    return true
+  } catch (error) {
+    console.error('保存设置失败:', error)
+    return false
+  }
 })
 
 // 笔记相关API

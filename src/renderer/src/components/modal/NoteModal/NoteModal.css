@@ -72,7 +72,7 @@ body.light .note-textarea::placeholder { color: #007acc; opacity: .7; }
 body.light .note-footer { border-top: none; }
 
 .note-actions {
-  display: flex; gap: 12px; justify-content: center; /* 横向排列 */
+  display: flex; gap: 12px; justify-content: center; gap: 50px; /* 横向排列 */
 }
 
 .action-btn {

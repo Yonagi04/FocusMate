@@ -4,19 +4,19 @@
       <h3>FocusMate 设置</h3>
       <div class="setting-item">
         <label>工作时长(分钟)</label>
-        <input type="number" min="1" v-model.number="workInput" />
+        <input type="number" min="1" max="120" v-model.number="workInput" />
       </div>
       <div class="setting-item">
         <label>休息时长(分钟)</label>
-        <input type="number" min="1" v-model.number="breakInput" />
+        <input type="number" min="1" max="60" v-model.number="breakInput" />
       </div>
       <div class="setting-item">
         <label>长休息时长(分钟)</label>
-        <input type="number" min="1" v-model.number="longBreakInput" />
+        <input type="number" min="1" max="120" v-model.number="longBreakInput" />
       </div>
       <div class="setting-item">
         <label>长休息轮数</label>
-        <input type="number" min="1" v-model.number="longBreakRoundInput" />
+        <input type="number" min="1" max="20" v-model.number="longBreakRoundInput" />
       </div>
       <div class="setting-item">
         <label>计时结束时系统提示音</label>
@@ -73,14 +73,32 @@ watch(() => [
 })
 
 function onApply() {
-  emit('apply', {
-    work: Math.max(1, Number(workInput.value)),
-    breakTime: Math.max(1, Number(breakInput.value)),
-    longBreak: Math.max(1, Number(longBreakInput.value)),
-    longBreakRound: Math.max(1, Number(longBreakRoundInput.value)),
-    sysNotify: !!sysNotifyInput.value,
-    theme: themeInput.value
-  })
+  try {
+    // 验证输入值
+    const work = Math.max(1, Math.min(120, Number(workInput.value) || 25))
+    const breakTime = Math.max(1, Math.min(60, Number(breakInput.value) || 5))
+    const longBreak = Math.max(1, Math.min(120, Number(longBreakInput.value) || 15))
+    const longBreakRound = Math.max(1, Math.min(20, Number(longBreakRoundInput.value) || 4))
+    const sysNotify = !!sysNotifyInput.value
+    const theme = themeInput.value || 'dark'
+
+    // 验证主题值
+    if (!['light', 'dark', 'system'].includes(theme)) {
+      console.error('无效的主题值:', theme)
+      return
+    }
+
+    emit('apply', {
+      work,
+      breakTime,
+      longBreak,
+      longBreakRound,
+      sysNotify,
+      theme
+    })
+  } catch (error) {
+    console.error('验证设置失败:', error)
+  }
 }
 </script>
 
